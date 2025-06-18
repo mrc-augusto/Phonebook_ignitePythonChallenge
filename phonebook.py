@@ -21,15 +21,22 @@ def see_contacts(contacts_list):
   return
 
 def update_contact(contacts_list, contact_index, new_name, new_phone, new_email):
-    index_contact_adjusted = int(contact_index) - 1 
-    if index_contact_adjusted >= 0 or index_contact_adjusted < len(contacts_list):
-      contacts_list[index_contact_adjusted] ['name'] = new_name
-      contacts_list[index_contact_adjusted] ['phone'] = new_phone
-      contacts_list[index_contact_adjusted] ['email'] = new_email
-      print(f'Contato atualizado: {new_name}, Telefone: {new_phone}, Email: {new_email}')
-    else:
-      print('Contato não encontrado. Verique se o contato existe.')
-    return
+  index_contact_adjusted = int(contact_index) - 1 
+  if index_contact_adjusted >= 0 or index_contact_adjusted < len(contacts_list):
+    contacts_list[index_contact_adjusted] ['name'] = new_name
+    contacts_list[index_contact_adjusted] ['phone'] = new_phone
+    contacts_list[index_contact_adjusted] ['email'] = new_email
+    print(f'Contato atualizado: {new_name}, Telefone: {new_phone}, Email: {new_email}')
+  else:
+    print('Contato não encontrado. Verique se o contato existe.')
+  return
+
+def delete_contact(contacts_list, contact_index):
+  index_contact_adjusted = int(contact_index) - 1
+  if index_contact_adjusted >= 0 and index_contact_adjusted < len(contacts_list):
+    deleted_contact = contacts_list.pop(index_contact_adjusted)
+    print(f'Contato {deleted_contact["name"]} apagado com sucesso!')
+  return
 
 contacts_list=[]
 
@@ -61,6 +68,11 @@ while True:
     new_phone = input('Digite o novo número de telefone: ')
     new_email = input('Digite o novo email do contato: ')
     update_contact(contacts_list, contact_index, new_name, new_phone, new_email)
+
+  elif choice == '6':
+    contact_index = input('Coloque o número do contato que deseja apagar:')
+    delete_contact(contacts_list, contact_index)
+    see_contacts(contacts_list)
 
   elif choice == '7':
     break
